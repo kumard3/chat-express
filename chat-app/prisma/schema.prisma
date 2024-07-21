@@ -11,18 +11,8 @@ model User {
     id        String    @id @default(cuid())
     username  String    @unique
     password  String
-    messages  Message[]
     createdAt DateTime  @default(now())
     updatedAt DateTime? @updatedAt
-}
-
-model Chat {
-    id               String    @id @default(cuid())
-    receiverUsername String?
-    senderUsername   String?
-    messages         Message[]
-    createdAt        DateTime  @default(now())
-    updatedAt        DateTime? @updatedAt
 }
 
 model Message {
@@ -31,7 +21,5 @@ model Message {
     senderId         String?
     receiverUsername String?
     senderUsername   String?
-    sender           User?    @relation(fields: [senderId], references: [id])
     createdAt        DateTime @default(now())
-    chat             Chat[]
 }

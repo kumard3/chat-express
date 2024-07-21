@@ -21,19 +21,6 @@ export const chatRouter = createTRPCRouter({
       });
       return message;
     }),
-  getMessages: publicProcedure.query(async () => {
-    const messages = await db.message.findMany({
-      where: {
-        createdAt: {
-          gt: new Date(Date.now() - 24 * 60 * 60 * 1000),
-        },
-      },
-      include: {
-        sender: true,
-      },
-    });
-    return messages;
-  }),
   getUserMessage: protectedProcedure
     .input(
       z.object({
